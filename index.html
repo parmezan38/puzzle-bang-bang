@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<title>Puzzle Bang Bang</title>
+		<style>
+		body {
+		  	background-color: black;
+		    padding: 0px;
+		    margin: 0px;
+		}
+		#orientationTurn{
+			background-color: purple;
+			width:100%;
+			height:100%;
+			position:absolute;
+			background-image:url("rotate_phone.png");
+			background-repeat:no-repeat;
+			background-position: center center;
+			background-origin: border-box;
+			background-size: contain;
+			display:none;
+		}
+	  </style> 
+	</head>
+	<body>
+		<script type="text/javascript" src="js/phaser.js"></script>
+		<script type="text/javascript" src="js/states/Boot.js"></script>
+		<script type="text/javascript" src="js/states/Preload.js"></script>
+    <script type="text/javascript" src="js/states/Intro.js"></script>
+    <script type="text/javascript" src="js/states/Menu.js"></script>
+		<script type="text/javascript" src="js/states/Game.js"></script>
+		<script type="text/javascript" src="js/states/Tutorial.js"></script>
+    <script type="text/javascript" src="js/states/End.js"></script>
+    <script type="text/javascript" src="js/states/GameBoard.js"></script>
+    <script type="text/javascript" src="js/states/GameReserve.js"></script>
+    <script type="text/javascript" src="js/states/GameRevolver.js"></script>
+    <script type="text/javascript" src="js/states/GameEnemy.js"></script>
+    <script type="text/javascript" src="js/states/GameWorld.js"></script>
+    <script type="text/javascript" src="js/states/GameBulletDamage.js"></script>
+    <script type="text/javascript" src="js/states/GameTexts.js"></script>
+		<script type="text/javascript" src="js/prefabs/Board.js"></script>
+		<script type="text/javascript" src="js/prefabs/Block.js"></script>
+    <script type="text/javascript" src="js/prefabs/Bullet.js"></script>
+    <script type="text/javascript" src="js/prefabs/Revolver.js"></script>
+    <script type="text/javascript" src="js/prefabs/Cowboy.js"></script>
+    <script type="text/javascript" src="js/prefabs/Cover.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<div id="orientationTurn"></div>
+	</body>
+</html>

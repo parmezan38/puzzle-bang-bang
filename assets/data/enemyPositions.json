@@ -1,0 +1,13 @@
+{   "levelInfo" : [
+        [
+            {"variations": [1,1,1,1,1,1,1,1,1,1,1,1,1], "difficulty": 1},
+            {"variations": [1,1,1,1,1,1,1,1,1,1,1,1,1], "difficulty": 1},
+            {"variations": [1,1,2,1], "difficulty": 1},
+            {"variations": [1,1,1,1], "difficulty": 1},
+            {"variations": [1,1,1,1], "difficulty": 1}
+        ],
+        [
+        {"variations": [1], "difficulty": 1}
+        ] 
+    ]
+}
