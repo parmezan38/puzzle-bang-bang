@@ -1,5 +1,5 @@
-var Match3 = Match3 || {};
-Match3.Tutorial = {
+var PuzzleBang = PuzzleBang || {};
+PuzzleBang.Tutorial = {
   init: function(passedArguments){
     this.nextLevel = passedArguments.nextLevel;
     this.tutorialNum = passedArguments.nextTutorial;

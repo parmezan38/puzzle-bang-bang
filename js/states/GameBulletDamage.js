@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.GameState.bulletDamage = function(enemy, damage, variation, multiplier){
+PuzzleBang.GameState.bulletDamage = function(enemy, damage, variation, multiplier){
   // Enemy Damage
   if(!enemy.isDead){
     // Obični
@@ -51,7 +51,7 @@ Match3.GameState.bulletDamage = function(enemy, damage, variation, multiplier){
     }
   }
 };
-Match3.GameState.getNearbyEnemies = function(enemy, multiplier){
+PuzzleBang.GameState.getNearbyEnemies = function(enemy, multiplier){
   let i, j,
       enemiesToShoot = [];
   // Find Enemies

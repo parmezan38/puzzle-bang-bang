@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Intro = {
+PuzzleBang.Intro = {
   create: function() {
     this.CENTER_POINT = {x: this.game.width/2, y: this.game.height/2};
     // debug grid

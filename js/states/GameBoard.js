@@ -1,12 +1,12 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
 // BOARD I BLOCKOVI [][][][][][]
-Match3.GameState.createBlock = function(x, y, data){
-  // Kreira 'Match3.Block' prefab u 'blocks' grupu
+PuzzleBang.GameState.createBlock = function(x, y, data){
+  // Kreira 'PuzzleBang.Block' prefab u 'blocks' grupu
   // Ako ne, resetira 
   let block = this.blocks.getFirstExists(false);
   if (!block){
-    block = new Match3.Block(this, x, y, data);
+    block = new PuzzleBang.Block(this, x, y, data);
     this.blocks.add(block); 
   }else{
     block.reset(x, y, data);
@@ -14,7 +14,7 @@ Match3.GameState.createBlock = function(x, y, data){
   block.scale.setTo(this.BLOCK_SPRITE_SIZE);
   return block;
 };
-Match3.GameState.drawBoard = function(){
+PuzzleBang.GameState.drawBoard = function(){
   let i, j;
   for (i = 0; i < this.NUM_ROWS; i++){
     this.boardPositionGrid.push([]);
@@ -27,7 +27,7 @@ Match3.GameState.drawBoard = function(){
   }
   this.game.world.bringToTop(this.blocks);
 };
-Match3.GameState.getBlockFromColRow = function(position){
+PuzzleBang.GameState.getBlockFromColRow = function(position){
   let foundBlock;
   this.blocks.forEachAlive(function(block){
     if(block.row === position.row && block.col === position.col){
@@ -36,7 +36,7 @@ Match3.GameState.getBlockFromColRow = function(position){
   }, this);
   return foundBlock;
 };
-Match3.GameState.dropBlock = function(sourceRow, targetRow, col){
+PuzzleBang.GameState.dropBlock = function(sourceRow, targetRow, col){
   let block = this.getBlockFromColRow({row: sourceRow, col: col}),
       targetY = this.BOARD_POS.y + targetRow * (this.BLOCK_SIZE + this.blocksGap);
   block.row = targetRow;
@@ -45,7 +45,7 @@ Match3.GameState.dropBlock = function(sourceRow, targetRow, col){
   blockMovement.to({y: targetY}, this.ANIMATION_TIME);
   blockMovement.start();
 };
-Match3.GameState.dropReserveBlock = function(sourceRow, targetRow, col){
+PuzzleBang.GameState.dropReserveBlock = function(sourceRow, targetRow, col){
   let x = this.BOARD_POS.x + col * (this.BLOCK_SIZE + this.blocksGap),
       y = -(this.BLOCK_SIZE + this.blocksGap) * this.board.RESERVE_ROW + sourceRow * (this.BLOCK_SIZE + this.blocksGap),
       block = this.createBlock(x, y, {asset: 'block' +  this.board.grid[targetRow][col], row: targetRow, col: col}),
@@ -54,7 +54,7 @@ Match3.GameState.dropReserveBlock = function(sourceRow, targetRow, col){
   blockMovement.to({y: targetY}, this.ANIMATION_TIME);
   blockMovement.start();
 };
-Match3.GameState.swapBlocks = function(block1, block2){
+PuzzleBang.GameState.swapBlocks = function(block1, block2){
   // when swapping scale block back to 1
   block1.scale.setTo(this.BLOCK_SPRITE_SIZE);
 
@@ -82,7 +82,7 @@ Match3.GameState.swapBlocks = function(block1, block2){
   block2Movement.to({x: block1.x, y: block1.y}, this.ANIMATION_TIME,Phaser.Easing.Circular.InOut, false);
   block2Movement.start();
 };
-Match3.GameState.pickBlock = function(block){
+PuzzleBang.GameState.pickBlock = function(block){
   // Ukljucuje natrag da se moze Chain Dodat u Reserve Slot
   this.isChainAddable = true;
   // only swap if the UI is not blocked
@@ -112,14 +112,14 @@ Match3.GameState.pickBlock = function(block){
     }
   }
 };
-Match3.GameState.clearSelection = function(){
+PuzzleBang.GameState.clearSelection = function(){
   this.isBoardBlocked = false;
   this.selectedBlock = null;
   // !!!??? ovo sam samo ja doda, neznan oće radit probleme
   this.targetBlock = null;
   this.blocks.setAll('frame', 0);
 };
-Match3.GameState.updateBoard = function(block){ // called from swapBlocks
+PuzzleBang.GameState.updateBoard = function(block){ // called from swapBlocks
   this.board.clearChains(block);
   this.board.updateGrid();
   // after the dropping has ended
@@ -133,7 +133,7 @@ Match3.GameState.updateBoard = function(block){ // called from swapBlocks
     }
   }, this); // time event end
 };
-Match3.GameState.updateBoardSprites = function(block){ // called from swapBlocks
+PuzzleBang.GameState.updateBoardSprites = function(block){ // called from swapBlocks
   if (!this.isBoardBlocked){
     this.board.clearChains(block);
     this.board.updateGrid();
@@ -149,7 +149,7 @@ Match3.GameState.updateBoardSprites = function(block){ // called from swapBlocks
     }, this); // time event end
   }
 };
-Match3.GameState.getBlockVariation = function(){
+PuzzleBang.GameState.getBlockVariation = function(){
   let i, variation, largest,
       chances = [],
       max = 0;
@@ -166,7 +166,7 @@ Match3.GameState.getBlockVariation = function(){
   variation = largest.variation;
   return variation;
 };
-Match3.GameState.updateBlockPositions = function(){
+PuzzleBang.GameState.updateBlockPositions = function(){
   let i, j;
   for (i = 0; i < this.NUM_ROWS; i++){
     for (j = 0; j < this.NUM_COLS; j++){

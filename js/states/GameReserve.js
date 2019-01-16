@@ -1,18 +1,18 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 // RESERVE  - - - 
-Match3.GameState.createReserveBullet = function(x, y, data, variation){
-  // Kreira 'Match3.Bullet' prefab u 'blocks' grupu
+PuzzleBang.GameState.createReserveBullet = function(x, y, data, variation){
+  // Kreira 'PuzzleBang.Bullet' prefab u 'blocks' grupu
   // Ako ne, resetira 
   let bullet = this.reserveSlots.getFirstExists(false);
   if (!bullet){
-    bullet = new Match3.Bullet(this, x, y, data, variation);
+    bullet = new PuzzleBang.Bullet(this, x, y, data, variation);
     this.reserveSlots.add(bullet); 
   }else{
     bullet.reset(x, y, data);
   }
   return bullet;
 };
-Match3.GameState.drawReserveBullets = function(){
+PuzzleBang.GameState.drawReserveBullets = function(){
   let i, j;
   // RESERVE
   for (i = 0; i < this.RESERVE_SLOTS; i++){
@@ -22,7 +22,7 @@ Match3.GameState.drawReserveBullets = function(){
   }
   this.game.world.bringToTop(this.reserveSlots);
 };
-Match3.GameState.switchReserve = function(){
+PuzzleBang.GameState.switchReserve = function(){
   let i, bullet, temp, x, y;
   // izvuč prvi po redu i pushat ga na kraj arraya
   // OVO NE FUNCKIONIRA ZA DRUGI BROJ SLOTOVA OD 3!
@@ -46,7 +46,7 @@ Match3.GameState.switchReserve = function(){
     bulletMotion.start();
   }
 };
-Match3.GameState.updateReserveSprites = function(){
+PuzzleBang.GameState.updateReserveSprites = function(){
   let i, bullet;
   // update Sprites
   for(i=0; i < this.reserveSlots.length;i++){
@@ -57,7 +57,7 @@ Match3.GameState.updateReserveSprites = function(){
   }
 };
 
-Match3.GameState.addToReserve = function(variation, multiplier){
+PuzzleBang.GameState.addToReserve = function(variation, multiplier){
   if (variation != 0){
     // OVO NE FUNCKIONIRA ZA DRUGI BROJ SLOTOVA OD 3!
     let i, bullet;
@@ -77,7 +77,7 @@ Match3.GameState.addToReserve = function(variation, multiplier){
     }
   }
 };
-Match3.GameState.swapReserveBullets = function(bullet1, bullet2){
+PuzzleBang.GameState.swapReserveBullets = function(bullet1, bullet2){
   let bullet1Movement = this.game.add.tween(bullet1);
   bullet1Movement.to({x: bullet2.x, y: bullet2.y}, this.ANIMATION_TIME);
   bullet1Movement.onComplete.add(function(){
@@ -95,7 +95,7 @@ Match3.GameState.swapReserveBullets = function(bullet1, bullet2){
   bullet2Movement.start();
 };
 
-Match3.GameState.pickReserveBullet = function(selectedBullet){
+PuzzleBang.GameState.pickReserveBullet = function(selectedBullet){
   // only swap if the UI is not blocked
   if(this.isBoardBlocked){
     return;
@@ -119,7 +119,7 @@ Match3.GameState.pickReserveBullet = function(selectedBullet){
     this.firstHoverReserve = null;
   }
 };
-Match3.GameState.clearReserveSelection = function(){
+PuzzleBang.GameState.clearReserveSelection = function(){
   this.isBoardBlocked = false;
   this.selectedReserveBullet.frame = this.selectedReserveBullet.multiplier - 1;
   this.targetReserveBullet.frame = this.targetReserveBullet.multiplier - 1;

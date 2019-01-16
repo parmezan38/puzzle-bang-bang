@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.GameState.createEndLevelTexts = function(){
+PuzzleBang.GameState.createEndLevelTexts = function(){
   this.youWonTxt = this.add.text(0, - 75, "YOU WON!");
   this.youWonTxt.targetX = 0;
   this.youWonTxt.targetY = -75;
@@ -39,7 +39,7 @@ Match3.GameState.createEndLevelTexts = function(){
   this.uiGroup.add(this.getReadyTxt);
   this.uiGroup.add(this.levelNameTxt);
 }; 
-Match3.GameState.exitMessage = function(){
+PuzzleBang.GameState.exitMessage = function(){
   this.isBoardBlocked = true;
   if (this.exitMessagePopup) {
     this.exitMessagePopup.destroy();
@@ -72,7 +72,7 @@ Match3.GameState.exitMessage = function(){
   this.exitNoButton.x = -10;
   this.pauseGame();
 }; 
-Match3.GameState.deadMessage = function(){
+PuzzleBang.GameState.deadMessage = function(){
   this.isBoardBlocked = true;
   if (this.deadMessagePopup) {
     this.deadMessagePopup.destroy();
@@ -105,7 +105,7 @@ Match3.GameState.deadMessage = function(){
   this.deadNoButton.y = 50;
   this.deadNoButton.x = 10;
 }; 
-Match3.GameState.hideBox = function(event){
+PuzzleBang.GameState.hideBox = function(event){
   if (this.exitMessagePopup) {
     this.exitMessagePopup.destroy();
   }
@@ -114,14 +114,14 @@ Match3.GameState.hideBox = function(event){
   }
   this.isBoardBlocked = false;
 };
-Match3.GameState.exitToMainMenu = function(event){
+PuzzleBang.GameState.exitToMainMenu = function(event){
   this.exitToMainMenuFadeOut();
 };
-Match3.GameState.retryLevel = function(event){
+PuzzleBang.GameState.retryLevel = function(event){
   this.hideBox();
   this.endLevel(true);
 };
-Match3.GameState.exitToMainMenuFadeOut = function(){
+PuzzleBang.GameState.exitToMainMenuFadeOut = function(){
   this.hideBox();
   let blackFade = this.game.add.tween(this.black);
   blackFade.to({alpha: 1}, 2000, Phaser.Easing.Linear.Out, false);
@@ -130,7 +130,7 @@ Match3.GameState.exitToMainMenuFadeOut = function(){
   }, this);
   blackFade.start();
 };
-Match3.GameState.fadeToDeadMessage = function(){
+PuzzleBang.GameState.fadeToDeadMessage = function(){
   let blackFade = this.game.add.tween(this.black);
   blackFade.to({alpha: 0.75}, 1000, Phaser.Easing.Linear.Out, false, 0);
   blackFade.start();

@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Block = function(state, x, y, data) {
+PuzzleBang.Block = function(state, x, y, data) {
   Phaser.Sprite.call(this, state.game, x, y, data.asset);
   this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
   this.asset = data.asset;
@@ -12,17 +12,17 @@ Match3.Block = function(state, x, y, data) {
   this.smoothed = false;
 };
 
-Match3.Block.prototype = Object.create(Phaser.Sprite.prototype);
-Match3.Block.prototype.constructor = Match3.Block;
+PuzzleBang.Block.prototype = Object.create(Phaser.Sprite.prototype);
+PuzzleBang.Block.prototype.constructor = PuzzleBang.Block;
 
-Match3.Block.prototype.reset = function(x, y, data){
+PuzzleBang.Block.prototype.reset = function(x, y, data){
   Phaser.Sprite.prototype.reset.call(this, x, y);
   this.loadTexture(data.asset);
   this.row = data.row;
   this.col = data.col; 
 }; 
 
-Match3.Block.prototype.kill = function(){
+PuzzleBang.Block.prototype.kill = function(){
   this.loadTexture('deadBlock');
   this.col = null;
   this.row = null;
@@ -30,7 +30,7 @@ Match3.Block.prototype.kill = function(){
       Phaser.Sprite.prototype.kill.call(this);
   }, this);
 };
-Match3.Block.prototype.updatePosition = function(){
+PuzzleBang.Block.prototype.updatePosition = function(){
   this.x = this.state.boardPositionGrid[this.row][this.col].x;
   this.y = this.state.boardPositionGrid[this.row][this.col].y;
 }; // updatePosition end

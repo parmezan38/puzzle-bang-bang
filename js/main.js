@@ -12,15 +12,15 @@ window.addEventListener('orientationchange', function(){
   console.log(gameRatio);
 } , false);
 
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.game = new Phaser.Game(originalWidth, originalHeight, Phaser.CANVAS, this, true, false);
+PuzzleBang.game = new Phaser.Game(originalWidth, originalHeight, Phaser.CANVAS, this, true, false);
 
-Match3.game.state.add('Boot', Match3.BootState);
-Match3.game.state.add('Preload', Match3.PreloadState);
-Match3.game.state.add('Intro', Match3.Intro);
-Match3.game.state.add('Menu', Match3.Menu);
-Match3.game.state.add('Game', Match3.GameState);
-Match3.game.state.add('Tutorial', Match3.Tutorial);
-Match3.game.state.add('End', Match3.End);
-Match3.game.state.start('Boot');
+PuzzleBang.game.state.add('Boot', PuzzleBang.BootState);
+PuzzleBang.game.state.add('Preload', PuzzleBang.PreloadState);
+PuzzleBang.game.state.add('Intro', PuzzleBang.Intro);
+PuzzleBang.game.state.add('Menu', PuzzleBang.Menu);
+PuzzleBang.game.state.add('Game', PuzzleBang.GameState);
+PuzzleBang.game.state.add('Tutorial', PuzzleBang.Tutorial);
+PuzzleBang.game.state.add('End', PuzzleBang.End);
+PuzzleBang.game.state.start('Boot');

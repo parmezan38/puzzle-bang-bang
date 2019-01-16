@@ -1,7 +1,7 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
 //loading the game assets
-Match3.PreloadState = {
+PuzzleBang.PreloadState = {
   preload: function() {
     //show loading screen
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'bar');

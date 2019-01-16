@@ -1,15 +1,15 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.GameState.createEnemy = function(x, y, variation, timeOffset, gridPos){        
+PuzzleBang.GameState.createEnemy = function(x, y, variation, timeOffset, gridPos){        
   let enemy = this.enemies.getFirstExists(false);
   if(!enemy){
-    enemy = new Match3.Cowboy(this, x, y, timeOffset, this.enemyInfo[variation - 1], gridPos);
+    enemy = new PuzzleBang.Cowboy(this, x, y, timeOffset, this.enemyInfo[variation - 1], gridPos);
     this.enemies.add(enemy);
     gridPos.enemy = variation;
   } 
 }; // createEnemy end
 
-Match3.GameState.addEnemies = function(){
+PuzzleBang.GameState.addEnemies = function(){
   let nextPosition = null,
       i, randNum;
   for(i = 0; i < this.enemyPositions.levelInfo[this.level][this.wave].variations.length; i++) {
@@ -40,7 +40,7 @@ Match3.GameState.addEnemies = function(){
   this.canAddEnemies = true;
 }; // addEnemies end
 
-Match3.GameState.startAddingEnemies = function(){
+PuzzleBang.GameState.startAddingEnemies = function(){
   let thisthis = this,
     addEnemiesDelay = this.game.time.create(false);
   addEnemiesDelay.add(this.WAVE_DELAY, function(){
@@ -49,7 +49,7 @@ Match3.GameState.startAddingEnemies = function(){
   addEnemiesDelay.start();
 }; // startAddingEnemies end
 
-Match3.GameState.shouldEnemyBeSpawnedBehindCover = function(difficulty){
+PuzzleBang.GameState.shouldEnemyBeSpawnedBehindCover = function(difficulty){
   let shouldSpawnBehindCover, num;
   num = Math.floor(Math.random() * 100);
   if(num < difficulty){
@@ -60,7 +60,7 @@ Match3.GameState.shouldEnemyBeSpawnedBehindCover = function(difficulty){
   return shouldSpawnBehindCover;
 }; // shouldEnemyBeSpawnedBehindCover end
 
-Match3.GameState.findFreeCoverSpot = function(){
+PuzzleBang.GameState.findFreeCoverSpot = function(){
   this.coverSpots = [];
   this.freeCoverSpots = [];
   this.freeOpenSpots = [];
@@ -92,7 +92,7 @@ Match3.GameState.findFreeCoverSpot = function(){
   }
 }; // findFreeCoverSpot end
 
-Match3.GameState.getRandomFreeOpenSpot = function(){
+PuzzleBang.GameState.getRandomFreeOpenSpot = function(){
   let num, freeOpenSpot;
   num = Math.floor( (Math.random() * this.freeOpenSpots.length) );
   if (this.freeOpenSpots.length < 1){
@@ -103,7 +103,7 @@ Match3.GameState.getRandomFreeOpenSpot = function(){
   return freeOpenSpot;
 }; // getRandomFreeSpot end
 
-Match3.GameState.getRandomFreeCoverSpot = function(){
+PuzzleBang.GameState.getRandomFreeCoverSpot = function(){
   let num, freeCoverSpot;
   num = Math.floor( (Math.random() * this.freeCoverSpots.length) );
   if (this.freeCoverSpots.length < 1){

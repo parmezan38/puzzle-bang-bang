@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Cover = function(state, x, y, data, gridPos) {
+PuzzleBang.Cover = function(state, x, y, data, gridPos) {
   Phaser.Sprite.call(this, state.game, x, y, data.asset);
   
   this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
@@ -18,10 +18,10 @@ Match3.Cover = function(state, x, y, data, gridPos) {
   this.maxHealth = data.health; 
 };
 
-Match3.Cover.prototype = Object.create(Phaser.Sprite.prototype);
-Match3.Cover.prototype.constructor = Match3.Cover;
+PuzzleBang.Cover.prototype = Object.create(Phaser.Sprite.prototype);
+PuzzleBang.Cover.prototype.constructor = PuzzleBang.Cover;
 
-Match3.Cover.prototype.damageCover = function(damage){
+PuzzleBang.Cover.prototype.damageCover = function(damage){
   if(!this.isDead){
     this.coverHealth -= damage;
     if (this.coverHealth <= 0){
@@ -32,7 +32,7 @@ Match3.Cover.prototype.damageCover = function(damage){
     }
   }
 };
-Match3.Cover.prototype.changeSprite = function(){
+PuzzleBang.Cover.prototype.changeSprite = function(){
   if (this.coverHealth < (this.maxHealth * 0.8) ){
     this.frame = 1;
     if (this.coverHealth < (this.maxHealth * 0.6) ){
@@ -46,7 +46,7 @@ Match3.Cover.prototype.changeSprite = function(){
     }
   }
 };
-Match3.Cover.prototype.updatePosition = function(){
+PuzzleBang.Cover.prototype.updatePosition = function(){
   this.x = this.state.worldGrid[this.gridPos.arrayY][this.gridPos.arrayX].x;
   this.y = this.state.worldGrid[this.gridPos.arrayY][this.gridPos.arrayX].y;
 }; // updatePosition end

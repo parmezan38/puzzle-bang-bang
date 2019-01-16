@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 //setting game configuration and loading the assets for the loading screen
-Match3.BootState = {
+PuzzleBang.BootState = {
   init: function() {
     //Orientation 
     this.game.scale.forceOrientation(false, true);

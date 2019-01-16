@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 // REVOLVER O O O O O O
-Match3.GameState.addSmokeEmitter = function(){
+PuzzleBang.GameState.addSmokeEmitter = function(){
   this.smokeEmitter = this.game.add.emitter(0, 0, 100);
   this.revolverAndSmoke.add(this.smokeEmitter);
   this.smokeEmitter.makeParticles('pxl9x_grey');
@@ -10,28 +10,28 @@ Match3.GameState.addSmokeEmitter = function(){
   this.smokeEmitter.setAlpha(1, 0, 1200, Phaser.Easing.Linear.Out);
   this.smokeEmitter.setScale(1, 2);
 };
-Match3.GameState.startSmokeEmitter = function(){
+PuzzleBang.GameState.startSmokeEmitter = function(){
   let randNum = (Math.random() * 6) - 3;
   this.smokeEmitter.emitX = randNum;
   this.game.add.tween(this.smokeEmitter).to( { emitX: randNum * -1 }, 250, Phaser.Easing.Sinusoidal.InOut, true, 0, Number.MAX_VALUE, true);
   this.smokeEmitter.start(false, 1500 + (randNum * 20), 6, 20);
 };
-Match3.GameState.addSpritesToRevolver = function(){
+PuzzleBang.GameState.addSpritesToRevolver = function(){
   this.revolverSprite = this.add.sprite(0, 0, 'revolver');
   this.revolverSprite.anchor.setTo(0.5);
   this.revolverGroup.add(this.revolverSprite);
 };
-Match3.GameState.createRevolverBullet = function(x, y, data, variation){
+PuzzleBang.GameState.createRevolverBullet = function(x, y, data, variation){
   let bullet = this.revolverSlots.getFirstExists(false);
   if (!bullet){
-    bullet = new Match3.Bullet(this, x, y, data, variation);
+    bullet = new PuzzleBang.Bullet(this, x, y, data, variation);
     this.revolverSlots.add(bullet); 
   }else{
     bullet.reset(x, y, data);
   }
   return bullet;
 };
-Match3.GameState.drawRevolverBullets = function(){
+PuzzleBang.GameState.drawRevolverBullets = function(){
   let i, revolverBullet, x, y;
   for (i = 0; i < this.REVOLVER_SLOTS; i++){
     x = this.revolver.revolverSlots[i].x;
@@ -41,7 +41,7 @@ Match3.GameState.drawRevolverBullets = function(){
   }
   this.game.world.bringToTop(this.revolverSlots);
 };
-Match3.GameState.updateRevolverSlots = function(revolverAngle){
+PuzzleBang.GameState.updateRevolverSlots = function(revolverAngle){
   let i, bullet, temp;
   // izvuč "barreled" (0) i pushat ga na kraj arraya    
   temp = this.revolverSlots.getChildAt(0);
@@ -55,7 +55,7 @@ Match3.GameState.updateRevolverSlots = function(revolverAngle){
     bullet.resetSprite('bullet' + this.revolver.revolverSlots[i].variation, this.revolver.revolverSlots[i].variation, this.revolver.revolverSlots[i].multiplier, revolverAngle);
   }
 };
-Match3.GameState.updateRevolverSprites = function(){
+PuzzleBang.GameState.updateRevolverSprites = function(){
   let i, bullet;
   // update Sprites
   for(i=0; i < this.revolverSlots.length; i++){
@@ -63,7 +63,7 @@ Match3.GameState.updateRevolverSprites = function(){
     bullet.resetSprite('bullet' + this.revolver.revolverSlots[i].variation, this.revolver.revolverSlots[i].variation, this.revolver.revolverSlots[i].multiplier);
   }
 };
-Match3.GameState.rotateRevolver = function(){
+PuzzleBang.GameState.rotateRevolver = function(){
   // rotate sprites
   let origRot = this.revolverGroup.angle,
       newRot = origRot + 60,
@@ -91,7 +91,7 @@ Match3.GameState.rotateRevolver = function(){
   }, this);
   revolverRotate.start();
 };
-Match3.GameState.rotateRevolverSprites = function(){
+PuzzleBang.GameState.rotateRevolverSprites = function(){
   if (this.revolverGroup.angle > 359 && this.revolverGroup.angle < 361){
     this.revolverSlots.forEach(function(child){
       child.angle = 0;
@@ -104,7 +104,7 @@ Match3.GameState.rotateRevolverSprites = function(){
     this.revolverSprite.angle += 120;
   }
 };
-Match3.GameState.rotateRevolverToFullSlot = function(){
+PuzzleBang.GameState.rotateRevolverToFullSlot = function(){
     let thisthis = this;
     function func(){
       if (thisthis.revolver.revolverSlots[0].variation != 0){
@@ -138,7 +138,7 @@ Match3.GameState.rotateRevolverToFullSlot = function(){
   }
   func();
 };
-Match3.GameState.loadRevolver = function(){ // Mova prvi Sprite iz 
+PuzzleBang.GameState.loadRevolver = function(){ // Mova prvi Sprite iz 
   let bullet, slot, newX, newY, motion;
   bullet = this.reserveSlots.getChildAt(0);
   
@@ -163,7 +163,7 @@ Match3.GameState.loadRevolver = function(){ // Mova prvi Sprite iz
   }, this);
   motion.start();
 };
-Match3.GameState.getBulletVariation = function(){
+PuzzleBang.GameState.getBulletVariation = function(){
   let i, variation, largest,
       chances = [],
       max = 0;
@@ -182,7 +182,7 @@ Match3.GameState.getBulletVariation = function(){
   variation = largest.variation;
   return variation;
 };
-Match3.GameState.recoilRevolver = function(){
+PuzzleBang.GameState.recoilRevolver = function(){
   let origY = this.revolverGroup.y,
       recoilStart = this.game.add.tween(this.revolverGroup);
   recoilStart.to( { y: this.revolverGroup.y + 10}, 150, Phaser.Easing.Elastic.Out);

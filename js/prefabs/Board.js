@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Board = function(state, rows, cols, blockVariations) {
+PuzzleBang.Board = function(state, rows, cols, blockVariations) {
   this.state = state;
   this.rows = rows;
   this.cols = cols;
@@ -28,7 +28,7 @@ Match3.Board = function(state, rows, cols, blockVariations) {
   this.populateGrid();
   this.populateReserveGrid();
 };
-Match3.Board.prototype.populateGrid = function(){
+PuzzleBang.Board.prototype.populateGrid = function(){
   let i,j,variation;
   for(i = 0; i < this.rows; i++) {
     for(j = 0; j < this.cols; j++) {
@@ -44,14 +44,14 @@ Match3.Board.prototype.populateGrid = function(){
   }
 };
 
-Match3.Board.prototype.findAllChainsAndRepopulate = function(){
+PuzzleBang.Board.prototype.findAllChainsAndRepopulate = function(){
   let chains = this.findAllChains();
   if(chains.length > 0){
     this.populateGrid();
   }
 };
 
-Match3.Board.prototype.populateReserveGrid = function(){
+PuzzleBang.Board.prototype.populateReserveGrid = function(){
   let i,j,variation;
   for(i = 0; i < this.RESERVE_ROW; i++) {
     for(j = 0; j < this.cols; j++) {
@@ -60,7 +60,7 @@ Match3.Board.prototype.populateReserveGrid = function(){
     }
   }
  };
-Match3.Board.prototype.consoleLog = function(){
+PuzzleBang.Board.prototype.consoleLog = function(){
   let i,j,
       prettyString = '';
   for(i = 0; i < this.RESERVE_ROW; i++) {
@@ -83,7 +83,7 @@ Match3.Board.prototype.consoleLog = function(){
   console.log(prettyString);
 };
 // Swapping Blocks
-Match3.Board.prototype.swap = function(source, target){
+PuzzleBang.Board.prototype.swap = function(source, target){
   let temp = this.grid[target.row][target.col];
   this.grid[target.row][target.col] = this.grid[source.row][source.col];
   this.grid[source.row][source.col] = temp;  
@@ -95,14 +95,14 @@ Match3.Board.prototype.swap = function(source, target){
   target.col = tempPos.col;
 };
 // Check if two blocks are adjacent
-Match3.Board.prototype.checkAdjacent = function(source, target){
+PuzzleBang.Board.prototype.checkAdjacent = function(source, target){
   let diffRow = Math.abs(source.row - target.row),
       diffCol = Math.abs(source.col - target.col),
       isAdjacent = (diffRow === 1 && diffCol === 0) || (diffRow === 0 && diffCol === 1);
   return isAdjacent;
 };
 // Check whether a single block is chained or not
-Match3.Board.prototype.isChained = function(block){
+PuzzleBang.Board.prototype.isChained = function(block){
   let isChained = false,
       variation = this.grid[block.row][block.col],
       row = block.row,
@@ -134,7 +134,7 @@ Match3.Board.prototype.isChained = function(block){
 }; // isChained end
 
 // Find All Chains
-Match3.Board.prototype.findAllChains = function(){
+PuzzleBang.Board.prototype.findAllChains = function(){
   let chained = [],
       i, j;
   for(i = 0; i < this.rows; i++) {
@@ -148,7 +148,7 @@ Match3.Board.prototype.findAllChains = function(){
 }; // findAllChains end
 
 // Find First Chain
-Match3.Board.prototype.findFirstChain = function(block, variation){
+PuzzleBang.Board.prototype.findFirstChain = function(block, variation){
   let chained = [],
       i, j;
   for(i = 0; i < this.rows; i++) {
@@ -164,7 +164,7 @@ Match3.Board.prototype.findFirstChain = function(block, variation){
 }; // findFirstChain end
 
 // Clear all Chains
-Match3.Board.prototype.clearChains = function(block){ // called from GameBoard.updateBoard
+PuzzleBang.Board.prototype.clearChains = function(block){ // called from GameBoard.updateBoard
   let variation = 0,
       multiplier = 1,
       shakeStrength,
@@ -213,7 +213,7 @@ Match3.Board.prototype.clearChains = function(block){ // called from GameBoard.u
   }
 };
 // Clear all Blocks
-Match3.Board.prototype.clearBlocks = function(){
+PuzzleBang.Board.prototype.clearBlocks = function(){
   // get all blocks that need to be cleared
   let allBlocks = [],
       i, j;
@@ -232,20 +232,20 @@ Match3.Board.prototype.clearBlocks = function(){
 
 // Dropping
 // Drop block in the main grid to another position. set source to zero
-Match3.Board.prototype.dropBlock = function(sourceRow, targetRow, col){
+PuzzleBang.Board.prototype.dropBlock = function(sourceRow, targetRow, col){
   this.grid[targetRow][col] = this.grid[sourceRow][col];
   this.grid[sourceRow][col] = 0;
   this.state.dropBlock(sourceRow, targetRow, col);
 };
 // Drop block from the reserve grid to main grid. set source to zero
-Match3.Board.prototype.dropReserveBlock = function(sourceRow, targetRow, col){
+PuzzleBang.Board.prototype.dropReserveBlock = function(sourceRow, targetRow, col){
   this.grid[targetRow][col] = this.reserveGrid[sourceRow][col];
   this.reserveGrid[sourceRow][col] = 0;
   this.state.dropReserveBlock(sourceRow, targetRow, col);
 };
 
 // move down blocks to fill in empty slots
-Match3.Board.prototype.updateGrid = function(){
+PuzzleBang.Board.prototype.updateGrid = function(){
   let i,j,k, foundBlock;
   // go trough all the rows, from the bottom up
   for(i = this.rows -1; i >= 0; i--){

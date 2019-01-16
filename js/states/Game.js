@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.GameState = {
+PuzzleBang.GameState = {
   init: function(passedArguments) {
     this.level = passedArguments.nextLevel;
     this.nextLevel = this.level + 1;
@@ -37,7 +37,7 @@ Match3.GameState = {
     this.ENEMY_BLOCK_SIZE = {w: 32 + this.enemiesGap, h: 45};
     this.ENEMIES_SIZE = {w: this.ENEMY_BLOCK_SIZE.w * this.ENEMY_POS_COLS, h: this.ENEMY_BLOCK_SIZE.h * this.ENEMY_POS_ROWS};
 
-    this.BASE_DAMAGE = 10;
+    this.BASE_DAMAGE = 4;
     this.enemyInfo = [
       {name: 'regular', asset: 'cowboy1', health: 10, damage: 1, shootDuration: 1, coverDuration: 3, preShootDuration: 2, postShootDuration: 1, shots: 1, hitChance: 50},
       {name: 'sniper', asset: 'sniper', health: 10, damage: 5, shootDuration: 1, coverDuration: 5, preShootDuration: 1, postShootDuration: 1, shots: 1, hitChance: 85},
@@ -145,10 +145,10 @@ Match3.GameState = {
     this.blocksAndTheirBackground.x = this.CENTER_POINT.x;
     this.blocksAndTheirBackground.y = this.CENTER_POINT.y;
     //board model
-    this.board = new Match3.Board(this, this.NUM_ROWS, this.NUM_COLS, this.NUM_VARIATIONS);
+    this.board = new PuzzleBang.Board(this, this.NUM_ROWS, this.NUM_COLS, this.NUM_VARIATIONS);
     
     // revolver
-    this.revolver = new Match3.Revolver(this, this.REVOLVER_SLOTS, this.RESERVE_SLOTS);
+    this.revolver = new PuzzleBang.Revolver(this, this.REVOLVER_SLOTS, this.RESERVE_SLOTS);
     
     this.drawBoard();
     this.drawReserveBullets();

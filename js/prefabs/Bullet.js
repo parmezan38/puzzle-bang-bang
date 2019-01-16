@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Bullet = function(state, x, y, data, variation) {
+PuzzleBang.Bullet = function(state, x, y, data, variation) {
   if (data.asset == 'bullet0'){
       Phaser.Sprite.call(this, state.game, x, y, 'bullet0');
   } else {
@@ -28,14 +28,14 @@ Match3.Bullet = function(state, x, y, data, variation) {
   }
 };
 
-Match3.Bullet.prototype = Object.create(Phaser.Sprite.prototype);
-Match3.Bullet.prototype.constructor = Match3.Bullet;
+PuzzleBang.Bullet.prototype = Object.create(Phaser.Sprite.prototype);
+PuzzleBang.Bullet.prototype.constructor = PuzzleBang.Bullet;
 
-Match3.Bullet.prototype.reset = function(x, y, data){
+PuzzleBang.Bullet.prototype.reset = function(x, y, data){
   Phaser.Sprite.prototype.reset.call(this, x, y);
   this.loadTexture(data.asset);
 };
-Match3.Bullet.prototype.resetSprite = function(asset, variation, multiplier){
+PuzzleBang.Bullet.prototype.resetSprite = function(asset, variation, multiplier){
   this.variation = variation;
   this.multiplier = multiplier;
   
@@ -60,12 +60,12 @@ Match3.Bullet.prototype.resetSprite = function(asset, variation, multiplier){
   }
 }; 
 
-Match3.Bullet.prototype.resetSpritePos = function(x, y){
+PuzzleBang.Bullet.prototype.resetSpritePos = function(x, y){
   this.x = x;
   this.y = y;
 }; 
 
-Match3.Bullet.prototype.kill = function(){
+PuzzleBang.Bullet.prototype.kill = function(){
   this.loadTexture('bullet0');
   this.col = null;
   this.row = null;

@@ -1,5 +1,5 @@
-var Match3 = Match3 || {};
-Match3.GameState.createWorldGrid = function(){
+var PuzzleBang = PuzzleBang || {};
+PuzzleBang.GameState.createWorldGrid = function(){
   let i,j;
   // kreira array
   for(i = 0; i < this.ENEMY_POS_ROWS; i++) {
@@ -20,10 +20,10 @@ Match3.GameState.createWorldGrid = function(){
   }
 }; // createWorldGrid end
 
-Match3.GameState.createCover = function(x, y, variation, gridPos){        
+PuzzleBang.GameState.createCover = function(x, y, variation, gridPos){        
   let cover = this.covers.getFirstExists(false);
   if(!cover){
-    cover = new Match3.Cover(this, x, y, this.coverInfo[variation - 1], gridPos);
+    cover = new PuzzleBang.Cover(this, x, y, this.coverInfo[variation - 1], gridPos);
     this.covers.add(cover);
     cover.x = x;
     cover.y = y;
@@ -31,7 +31,7 @@ Match3.GameState.createCover = function(x, y, variation, gridPos){
   }   
 }; // createCover end
 
-Match3.GameState.addCovers = function(){
+PuzzleBang.GameState.addCovers = function(){
   let i, variation;
   variation = Math.floor( (Math.random() * this.coverData.level1.length) );
   
@@ -45,7 +45,7 @@ Match3.GameState.addCovers = function(){
   }
 }; // addCovers end
 
-Match3.GameState.updateWorldPositions = function(){
+PuzzleBang.GameState.updateWorldPositions = function(){
   let i,j;
   // napravi mu informacije
   for(i = 0; i < this.ENEMY_POS_ROWS; i++) {

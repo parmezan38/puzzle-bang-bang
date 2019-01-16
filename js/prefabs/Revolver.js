@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Revolver = function(state, revolverSlotNum, reserveSlotNum) {
+PuzzleBang.Revolver = function(state, revolverSlotNum, reserveSlotNum) {
   this.state = state;
   this.revolverSlotNum = revolverSlotNum;
   this.reserveSlotNum = reserveSlotNum;
@@ -39,7 +39,7 @@ Match3.Revolver = function(state, revolverSlotNum, reserveSlotNum) {
   this.populateRevolverSlots(); 
 };
 
-Match3.Revolver.prototype.consoleLog = function(){
+PuzzleBang.Revolver.prototype.consoleLog = function(){
   let i,
       prettyString = '';
   for(i = 0; i < this.revolverSlotNum; i++) {
@@ -53,21 +53,21 @@ Match3.Revolver.prototype.consoleLog = function(){
   prettyString += ']';
 };
 
-Match3.Revolver.prototype.populateReserveSlots = function(){
+PuzzleBang.Revolver.prototype.populateReserveSlots = function(){
   let i, variation;
   for(i = 0; i < this.reserveSlotNum; i++) {
     variation = this.state.getBulletVariation();
     this.reserveSlots[i] = {"variation": variation, "multiplier": 1, "x": this.reserveSlotsPositions[i].x, "y": this.reserveSlotsPositions[i].y};
   }
 };
-Match3.Revolver.prototype.populateRevolverSlots = function(){
+PuzzleBang.Revolver.prototype.populateRevolverSlots = function(){
   let i, variation;
   for(i = 0; i < this.revolverSlotNum; i++) {
     variation = this.state.getBulletVariation();
     this.revolverSlots[i] = {"variation": variation, "multiplier": 1, "x": this.revolverSlotPositions[i].x, "y": this.revolverSlotPositions[i].y};
   }
 };
-Match3.Revolver.prototype.rotate = function(){
+PuzzleBang.Revolver.prototype.rotate = function(){
   let temp;
   // izbacit "barreled" bullet
   this.revolverSlots[0].variation = 0;
@@ -76,7 +76,7 @@ Match3.Revolver.prototype.rotate = function(){
   temp = this.revolverSlots.shift();
   this.revolverSlots.push(temp);
 };
-Match3.Revolver.prototype.switchReserve = function(){
+PuzzleBang.Revolver.prototype.switchReserve = function(){
   let i, temp;
   // izbacit prvi na redu bullet
   this.reserveSlots[0].variation = 0;
@@ -92,7 +92,7 @@ Match3.Revolver.prototype.switchReserve = function(){
   }
 };
 // Swapping Reserve Bullets
-Match3.Revolver.prototype.swapReserveBullets = function(source, target){
+PuzzleBang.Revolver.prototype.swapReserveBullets = function(source, target){
   let indexOfFirst, indexOfSecond, temp;
   indexOfFirst = this.state.reserveSlots.getChildIndex(source);
   indexOfSecond = this.state.reserveSlots.getChildIndex(target);
@@ -107,7 +107,7 @@ Match3.Revolver.prototype.swapReserveBullets = function(source, target){
 };
 
 // Clear all Bullets
-Match3.Revolver.prototype.clearBullets = function(){
+PuzzleBang.Revolver.prototype.clearBullets = function(){
   let i, variation;
   for(i = 0; i < this.revolverSlots.length; i++) {
     variation = this.state.getBulletVariation();

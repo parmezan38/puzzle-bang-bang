@@ -1,6 +1,6 @@
-var Match3 = Match3 || {};
+var PuzzleBang = PuzzleBang || {};
 
-Match3.Cowboy = function(state, x, y, timeOffset, data, gridPos) {
+PuzzleBang.Cowboy = function(state, x, y, timeOffset, data, gridPos) {
   Phaser.Sprite.call(this, state.game, x, y, data.asset);
   
   this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
@@ -89,10 +89,10 @@ Match3.Cowboy = function(state, x, y, timeOffset, data, gridPos) {
   this.startRun();
 };
 
-Match3.Cowboy.prototype = Object.create(Phaser.Sprite.prototype);
-Match3.Cowboy.prototype.constructor = Match3.Cowboy;
+PuzzleBang.Cowboy.prototype = Object.create(Phaser.Sprite.prototype);
+PuzzleBang.Cowboy.prototype.constructor = PuzzleBang.Cowboy;
 
-Match3.Cowboy.prototype.startRun = function(){
+PuzzleBang.Cowboy.prototype.startRun = function(){
   this.isInPlace = false;
   this.x = this.startingX;
   let motion = this.game.add.tween(this);
@@ -108,7 +108,7 @@ Match3.Cowboy.prototype.startRun = function(){
   this.play('run');
 };
 
-Match3.Cowboy.prototype.beginActions = function(){
+PuzzleBang.Cowboy.prototype.beginActions = function(){
   this.animations.stop('run');
   this.setCover(false);
   this.isInPlace = true;
@@ -117,7 +117,7 @@ Match3.Cowboy.prototype.beginActions = function(){
   this.checkIfBehindCover();
 };
 
-Match3.Cowboy.prototype.setCover = function(boool){
+PuzzleBang.Cowboy.prototype.setCover = function(boool){
   if(this.name != 'turtle' && !this.currentCover){
     this.isCovered = boool;
   } 
@@ -132,7 +132,7 @@ Match3.Cowboy.prototype.setCover = function(boool){
     this.isCovered = true;
   }
 };
-Match3.Cowboy.prototype.checkIfBehindCover = function(){
+PuzzleBang.Cowboy.prototype.checkIfBehindCover = function(){
   let coverPositionIsSame = false;
   // Go trough all the covers in cover group
   this.state.covers.forEach(function(cover){
@@ -150,7 +150,7 @@ Match3.Cowboy.prototype.checkIfBehindCover = function(){
   }
 };
 
-Match3.Cowboy.prototype.damageEnemy = function(damage, particle, variation){
+PuzzleBang.Cowboy.prototype.damageEnemy = function(damage, particle, variation){
   if(!this.isDead){
     this.enemyHealth -= damage;
     this.animations.stop();
@@ -165,7 +165,7 @@ Match3.Cowboy.prototype.damageEnemy = function(damage, particle, variation){
     }
   }
 };
-Match3.Cowboy.prototype.shakeEnemy = function(){
+PuzzleBang.Cowboy.prototype.shakeEnemy = function(){
   let origX = this.x,
       randNum = Math.round(Math.random()) * 2 - 1,
       shakeStart = this.game.add.tween(this);
@@ -179,7 +179,7 @@ Match3.Cowboy.prototype.shakeEnemy = function(){
 };
 
 
-Match3.Cowboy.prototype.electricDamage = function(){
+PuzzleBang.Cowboy.prototype.electricDamage = function(){
   let shockIn = this.game.add.tween(this);
   shockIn.to({tint: 0x00bdf5}, 150, Phaser.Easing.Linear.None, false);
   shockIn.onComplete.add(function(){
@@ -189,7 +189,7 @@ Match3.Cowboy.prototype.electricDamage = function(){
   }, this);
   shockIn.start();
 };
-Match3.Cowboy.prototype.particleFx = function(asset, intensity){
+PuzzleBang.Cowboy.prototype.particleFx = function(asset, intensity){
   let emitter = this.game.add.emitter(this.world.x, this.world.y - 24,  100);
   emitter.makeParticles(asset);
   emitter.minParticleSpeed.setTo(-42, -32);
@@ -198,14 +198,14 @@ Match3.Cowboy.prototype.particleFx = function(asset, intensity){
   emitter.start(true, 250 * (intensity * 1.7 ), null, 16 * intensity); // (is explosion true/false, life span, frequency of release, how many)
 };
 
-Match3.Cowboy.prototype.createPoisonTimer = function(){
+PuzzleBang.Cowboy.prototype.createPoisonTimer = function(){
   this.tint = 0x47882a;
   this.countdownTimer = this.game.time.create(true);
   this.countdownEvent = this.countdownTimer.loop(2000, this.poisonDamageLoop, this);
   this.countdownTimer.start();
 };
 
-Match3.Cowboy.prototype.poisonDamageLoop = function(){
+PuzzleBang.Cowboy.prototype.poisonDamageLoop = function(){
   if(!this.isDead && this.isPoisoned && this.poisonTimes > 0){
     this.tint = 0x47882a;
     this.play('damage');
@@ -223,7 +223,7 @@ Match3.Cowboy.prototype.poisonDamageLoop = function(){
   }
 };
 
-Match3.Cowboy.prototype.killCowboy = function(){
+PuzzleBang.Cowboy.prototype.killCowboy = function(){
   let i;
   this.isDead = true;
   this.play('dead');
@@ -242,7 +242,7 @@ Match3.Cowboy.prototype.killCowboy = function(){
 };
 
 // UPDATE
-Match3.Cowboy.prototype.update = function(){
+PuzzleBang.Cowboy.prototype.update = function(){
   if(!this.isDead && this.isInPlace){
     if(!this.isTimePaused){
       this.time++;
@@ -252,17 +252,17 @@ Match3.Cowboy.prototype.update = function(){
     this.time = 0;
   }// isDead + else end
 }; // UPDATE end
-Match3.Cowboy.prototype.updatePosition = function(){
+PuzzleBang.Cowboy.prototype.updatePosition = function(){
   this.x = this.state.worldGrid[this.gridPos.arrayY][this.gridPos.arrayX].x;
   this.y = this.state.worldGrid[this.gridPos.arrayY][this.gridPos.arrayX].y;
 }; // updatePosition end
 
 // States
-Match3.Cowboy.prototype.switchState = function(newState){
+PuzzleBang.Cowboy.prototype.switchState = function(newState){
   this.time = 0;
   this.fsm = newState;
 };
-Match3.Cowboy.prototype.stateCovering = function(){
+PuzzleBang.Cowboy.prototype.stateCovering = function(){
   if (this.isBehindCover){
     this.setCover(true);
     this.animations.play('coverDown');
@@ -275,7 +275,7 @@ Match3.Cowboy.prototype.stateCovering = function(){
   }
 };
 
-Match3.Cowboy.prototype.shootOrMiss = function(){
+PuzzleBang.Cowboy.prototype.shootOrMiss = function(){
   this.time = 0;
   let randNum = Math.floor( Math.random() * 100);
   if(randNum <= this.hitChance){
@@ -308,19 +308,19 @@ Match3.Cowboy.prototype.shootOrMiss = function(){
     this.switchState(this.stateShoot);
   }
 };
-Match3.Cowboy.prototype.stateShoot = function(){
+PuzzleBang.Cowboy.prototype.stateShoot = function(){
   if (this.time >= this.shootDuration * this.game.time.fps){
     this.shootOrMiss();
   }
 };
-Match3.Cowboy.prototype.statePreShoot = function(){
+PuzzleBang.Cowboy.prototype.statePreShoot = function(){
   this.setCover(false);
   this.animations.play('idle'); 
   if (this.time >= this.preShootDuration * this.game.time.fps){
     this.switchState(this.stateShoot);
   }
 };
-Match3.Cowboy.prototype.statePostShoot = function(){
+PuzzleBang.Cowboy.prototype.statePostShoot = function(){
   this.shots = this.maxShots;
   this.setCover(false);
   if (this.animations.currentAnim.name == 'shoot' && this.animations.currentAnim.frame === 0){
